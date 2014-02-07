@@ -17,12 +17,9 @@ conn = Faraday.new(url: GEOCODER) do |faraday|
 end
 
 # Setup table to hold data
-DB.drop_table(:user_demographics)
-DB.create_table(:user_demographics) do
+DB.drop_table(:location_demographics)
+DB.create_table(:location_demographics) do
   foreign_key :user_id
-  String :first_name
-  String :assigned_gender
-  String :real_gender
   String :location_json
   String :country_code
   String :country_name
@@ -37,14 +34,14 @@ end
 
 # Assign users
 users = DB[:users]
-demo = DB[:user_demographics]
+demo = DB[:location_demographics]
 
 users.each do |user|
   name = user[:first_name]
   if user[:current_login_ip].match(Resolv::IPv4::Regex)
-    resp = conn.get("/json/#{user[:current_login_ip]}")
-    geodata = JSON.parse(resp.body)
+    json = conn.get("/json/#{user[:current_login_ip]}").body
+    geodata = JSON.parse(json)
     puts "#{name}, #{geodata.inspect}"
-    demo.insert(user_id: user[:id], lat: geodata["latitude"], lng: geodata["longitude"], country_code: geodata["country_name"], country_name: geodata["country_name"], region_code: geodata["region_code"], region_name: geodata["region_name"], city: geodata["city"], metro_code: geodata["metro_code"], areacode: geodata["areacode"],)
+    demo.insert(user_id: user[:id], lat: geodata["latitude"], lng: geodata["longitude"], country_code: geodata["country_name"], country_name: geodata["country_name"], region_code: geodata["region_code"], region_name: geodata["region_name"], city: geodata["city"], metro_code: geodata["metro_code"], areacode: geodata["areacode"], location_json: json)
   end
 end

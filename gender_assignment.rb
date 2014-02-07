@@ -8,8 +8,8 @@ require 'sexmachine'
 DB = Sequel.connect(:adapter=>'postgres', :host=>'localhost', :database=>'machine_learning', :user=>'rails')
 
 # Setup table to hold data
-DB.drop_table(:user_demographics)
-DB.create_table(:user_demographics) do
+# DB.drop_table(:gender_demographics)
+DB.create_table(:gender_demographics) do
   foreign_key :user_id
   String :first_name
   String :assigned_gender
@@ -21,7 +21,7 @@ d = SexMachine::Detector.new(:case_sensitive => false)
 
 # Assign users
 users = DB[:users]
-demo = DB[:user_demographics]
+demo = DB[:gender_demographics]
 
 users.each do |user|
   name = user[:first_name]
