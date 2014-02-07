@@ -2,7 +2,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     method_source (0.8.2)
+    multipart-post (2.0.0)
     pg (0.17.1)
     pry (0.9.12.6)
       coderay (~> 1.0)
@@ -18,6 +21,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  faraday
   pg
   pry
   sequel

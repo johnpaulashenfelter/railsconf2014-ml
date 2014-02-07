@@ -7,3 +7,4 @@ gem 'sequel'
 gem 'pry'
 
 gem 'sexmachine'
+gem 'faraday'
