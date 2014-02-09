@@ -1,3 +1,8 @@
+require 'rubygems'
+require 'bundler/setup'
+require 'pry'
+require 'sequel'
+
 # class Cluster
 #   attr_accessor :id, :people
 
@@ -74,32 +79,42 @@ class Cluster
     return gd
 
   end
-
 end
 
 def kmeans
 
   # Sample user hashes
-  marc = { 'linux' => '13', 'oss' => '10', 'cloud' => '6',
-           'java' => '0', 'agile' => '0' }
-  megan = { 'linux' => '3', 'oss' => '0', 'cloud' => '1',
-            'java' => '6', 'agile' => '7' }
-  elise = { 'linux' => '11', 'oss' => '0', 'cloud' => '9',
-            'java' => '0', 'agile' => '1' }
-  jill = { 'linux' => '0', 'oss' => '3', 'cloud' => '0',
-           'java' => '9', 'agile' => '8' }
+  # marc = { 'linux' => '13', 'oss' => '10', 'cloud' => '6',
+  #          'java' => '0', 'agile' => '0' }
+  # megan = { 'linux' => '3', 'oss' => '0', 'cloud' => '1',
+  #           'java' => '6', 'agile' => '7' }
+  # elise = { 'linux' => '11', 'oss' => '0', 'cloud' => '9',
+  #           'java' => '0', 'agile' => '1' }
+  # jill = { 'linux' => '0', 'oss' => '3', 'cloud' => '0',
+  #          'java' => '9', 'agile' => '8' }
 
   # Define our two clusters and initialize them with two users
   clusters = []
-  cluster =  Cluster.new
-  cluster.add(marc)
-  cluster.add(megan)
-  clusters << cluster
+  # cluster =  Cluster.new
+  # cluster.add(marc)
+  # cluster.add(elise)
+  # cluster.add(megan)
+  # clusters << cluster
 
-  cluster = Cluster.new
-  cluster.add(elise)
-  cluster.add(jill)
-  clusters << cluster
+  # cluster = Cluster.new
+  # cluster.add(jill)
+  # clusters << cluster
+
+# Connect db
+  db = Sequel.connect(:adapter=>'postgres', :host=>'localhost', :database=>'machine_learning', :user=>'rails')
+
+  users = db[:users].limit(10)
+
+  users.each do |user|
+    cluster = Cluster.new
+    cluster.add(distance: user[:person_badges_count])
+    clusters << cluster
+  end
 
   changed = true
 
