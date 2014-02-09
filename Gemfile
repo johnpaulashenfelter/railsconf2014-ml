@@ -8,3 +8,6 @@ gem 'pry'
 
 gem 'sexmachine'
 gem 'faraday'
+
+gem 'ai4r'
+gem 'hierclust'
