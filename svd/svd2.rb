@@ -5,12 +5,14 @@ require 'linalg'
 require 'pry'
 require 'sequel'
 
-DB = Sequel.connect(:adapter=>'postgres', :host=>'localhost', :database=>'machine_learning', :user=>'rails')
+DB = Sequel.connect('postgres://localhost/machine_learning?user=rails')
 
 users_list = DB[:users].limit(10)
 
 answers = []
 users = {}
+cols = %w(html css js ruby ios biz android php wp design devtools)
+
 users_list.each_with_index do |user,i|
   users[i] = "#{user[:first_name]} #{user[:last_name]}"
   answers << [user[:html_points], user[:css_points], user[:js_points], user[:ruby_points], user[:ios_points], user[:biz_points], user[:android_points], user[:php_points], user[:wp_points], user[:design_points], user[:devtools_points]]
@@ -43,10 +45,10 @@ v2.rows.each { |x|
     count += 1
   }
 
-binding.pry
 # Remove all users who fall below the 0.90 cosine similarity cutoff and sort by similarity
 similar_users = user_sim.delete_if {|k,sim| sim < 0.9 }.sort {|a,b| b[1] <=> a[1] }
 similar_users.each { |u| printf "%s (ID: %d, Similarity: %0.3f) \n", users[u[0]], u[0], u[1]  }
+binding.pry
 
 # We'll use a simple strategy in this case:
 #   1) Select the most similar user
