@@ -4,7 +4,7 @@
 
 ### Abstract:
 
-Your Rails app is full of data that can (and should!) be turned into useful information with some simple machine learning technqiues. We'll look at basic techniques that are both immediately applicable and the foundation for more advanced analysis -- starting with your Users table.
+Your Rails app is full of data that can (and should!) be turned into useful information with some simple machine learning techniqiues. We'll look at basic techniques that are both immediately applicable and the foundation for more advanced analysis -- starting with your Users table.
 
 We will cover the basics of assigning users to categories, segmenting users by behavior, and simple recommendation algorithms. Come as a Rails dev, leave a data scientist.
 
@@ -21,6 +21,7 @@ Finally we'll look at using K-means to recommend similar content (eg blog posts)
 I'm going to do as much of this as possible with real data from users in the audience -- assuming we can get solid enough internet access that they can fill out a form.
 
 As a bonus, we can talk about integrating R into Rails applications if there's any interest.
+################################################
 
 ## User Demographics
 
@@ -38,4 +39,18 @@ Every app has a users table.
 * Plenty of FOSS options, also paid. Can use http://freegeoip.net locally!
 * Store it when they login, track over time. Not a dw talk tho
 
-## Grouping
+## Grouping/Hiearchy
+
+* Many ways to generate groups, but generally you map to N-dimensional space and calculate a distance between each group (cluster). Merge the closest and repeat.
+
+### Simple cluster
+* Finding your rockstar users by badges
+
+### More complex clustering
+* breaking it out by points
+* differences between algorithms
+
+### Stop conditions
+* by group count
+* by difference
+
