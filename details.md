@@ -1,5 +1,9 @@
 # Machine Learning for Fun and Profit (with Ruby) -- The Talk
 
+## Prep
+
+* get names from users so we can use them as gender categories, also their country if its not the US?
+
 ## Intro
 
 Machine learning. Big Data. Data science.
@@ -37,10 +41,92 @@ Our first question is about value -- while its a no-brainer to gain some goodwil
 
 We don't have to have an exact number -- we're probably fine with a percentage that's rounded to the nearest 5 or even 10%. We can assume 50/50, but we'd now we're also curious about the gender ratio for fun.
 
-How can we decide _today_? And without spending a lot of money on a survey, marketing data, or some other expensive or timeconsuming option?
+How can we decide _today_? And without spending a lot of money on a survey, marketing data, or some other expensive or timeconsuming option? Is there an acceptable proxy for gender?
 
+First name might be a good candidate
 
+John => male
+Susan => female
 
+Looking good!
+
+Kim => female
+
+Kim Stanley Robinson is male
+Kim Mohan (Dragon Magazine FTW!) is male
+
+Well, they are certainly an exception to the rule, but we don't need precision. But let's not show this information on their public profile! But we can agree Kim is generally a female name.
+
+River => ?
+Cedar => ?
+Justice => ?
+
+Hmmm, problem is harder than it seemed. 
+
+And another one
+
+Jamie => ?
+
+This one probably depends on where you're from and your perspective on internationalization. Its traditionally a female name in the US but a more masculine name in Great Britain for example. 
+
+So is this going to be useful? Will it be better than a survey? Probably -- survey response rates are terrible and the extrapolation from the sample may be just as bad or worse.
+
+https://github.com/bmuller/sexmachine
+
+### Results
+
+For this data set, 
+
+mostly_male 7
+mostly_female 3
+female 11
+male 86
+andy 62
+
+169 users
+
+	* 08% (11+3 / 169) female
+	* 55% (86+7 /169) male
+	* 37% unknown
+	  
+
+There were 50 junk users (demo, test, etc) assigned to the andy group, so after removing them
+
+mostly_male	7
+mostly_female	1
+female	11
+male	86
+andy	14
+
+119 users
+
+	* 11% (11+1 / 119) female
+	* 78% (86+7 /119) male
+	* 11% unknown
+
+Hand coding the remaining andy folks, just for fun
+
+119 users
+
+	* 11% (13/119) female
+	* 89% (106/119) male
+
+### Lessons Learned
+
+As far as the data
+
+	* Clean the junk!!
+	* extra spaces a prob, chomp!
+	* hyphenated, initials,  and compound was a problem (Jean-Louis, John Paul)
+	* Lots of Chris, mostly_male
+
+As far as the results
+
+	* Quick and dirty analysis with data said ~10% female.
+	* Refined and clean data said ~10%
+	* Actual data (hand coded by me) ~10%
+
+Thoughts?
 
 ## Exercise 2: Geolocation
 ## Exercise 3: Grouping (Categorization)

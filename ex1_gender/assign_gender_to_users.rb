@@ -5,7 +5,7 @@ require 'sequel'
 require 'sexmachine'
 
 # Connect db
-DB = Sequel.connect(:adapter=>'postgres', :host=>'localhost', :database=>'machine_learning', :user=>'rails')
+DB = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'machine_learning', user: 'rails')
 
 # Setup table to hold data
 DB.create_table!(:gender_demographics) do
@@ -16,7 +16,7 @@ DB.create_table!(:gender_demographics) do
 end
 
 # Load detector
-d = SexMachine::Detector.new(:case_sensitive => false)
+d = SexMachine::Detector.new(case_sensitive: false)
 
 # Assign users
 users = DB[:users]
@@ -26,5 +26,11 @@ users.each do |user|
   name = user[:first_name]
   gender = d.get_gender user[:first_name]
   demo.insert(user_id: user[:id], first_name: name, assigned_gender: gender.to_s)
-  puts "#{name}, #{gender}"
 end
+
+puts "Results"
+puts demo.group_and_count(:assigned_gender).all
+
+puts "Androgenous Names"
+andys = demo.where(assigned_gender: 'andy')
+andys.each {|a| puts a[:first_name]}
