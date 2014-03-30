@@ -1,6 +1,6 @@
 # Machine Learning for Fun and Profit (with Ruby)
 
-## The talk
+## The proposal
 
 ### Abstract:
 
@@ -21,9 +21,8 @@ Finally we'll look at using K-means to recommend similar content (eg blog posts)
 I'm going to do as much of this as possible with real data from users in the audience -- assuming we can get solid enough internet access that they can fill out a form.
 
 As a bonus, we can talk about integrating R into Rails applications if there's any interest.
-################################################
 
-## User Demographics
+## TL;DR
 
 Every app has a users table.
 
@@ -39,18 +38,20 @@ Every app has a users table.
 * Plenty of FOSS options, also paid. Can use http://freegeoip.net locally!
 * Store it when they login, track over time. Not a dw talk tho
 
-## Grouping/Hiearchy
+### Grouping/Hiearchy
 
 * Many ways to generate groups, but generally you map to N-dimensional space and calculate a distance between each group (cluster). Merge the closest and repeat.
 
-### Simple cluster
+#### Simple cluster
 * Finding your rockstar users by badges
 
-### More complex clustering
+#### More complex clustering
 * breaking it out by points
 * differences between algorithms
 
-### Stop conditions
+#### Stop conditions
 * by group count
 * by difference
+
+## The Talk
 
