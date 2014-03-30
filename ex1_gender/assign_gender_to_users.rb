@@ -5,7 +5,8 @@ require 'sequel'
 require 'sexmachine'
 
 # Connect db
-DB = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'machine_learning', user: 'rails')
+# pg DB = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'machine_learning', user: 'rails')
+DB = Sequel.connect('sqlite://machine-learning.db')
 
 # Setup table to hold data
 DB.create_table!(:gender_demographics) do
