@@ -1,3 +1,5 @@
+#cd $GOPATH/src/github.com/fiorix/freegeoip
+# ./freegeoip
 require 'rubygems'
 require 'bundler/setup'
 require 'pry'
@@ -45,3 +47,4 @@ users.each do |user|
     demo.insert(user_id: user[:id], lat: geodata["latitude"], lng: geodata["longitude"], country_code: geodata["country_name"], country_name: geodata["country_name"], region_code: geodata["region_code"], region_name: geodata["region_name"], city: geodata["city"], metro_code: geodata["metro_code"], areacode: geodata["areacode"], location_json: json)
   end
 end
+binding.pry

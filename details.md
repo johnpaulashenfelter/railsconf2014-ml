@@ -27,6 +27,8 @@ You should be able to clone the git repository and run bundler in the root direc
 
 ## Exercise 1: Gender
 
+### The problem
+
 Question: We're going to sell logo T-shirts. What proportion of women's cut T-Shirts should we order?
 
 Let's think about your signup form -- do you ask for a gender? [Sidenote: How many? Facebook offers ~50 different options now]. Do you even *want* to? Asking more questions can slow the signup process, reduce your conversion rate, and doesn't help backfill your information.
@@ -45,7 +47,7 @@ How can we decide _today_? And without spending a lot of money on a survey, mark
 
 First name might be a good candidate
 
-John => male
+John => male,
 Susan => female
 
 Looking good!
@@ -123,18 +125,112 @@ As far as the data
 As far as the results
 
 	* Quick and dirty analysis with data said ~10% female.
-	* Refined and clean data said ~10%
+	* Refined and cleaned data said ~10%
 	* Actual data (hand coded by me) ~10%
 
 Thoughts?
 
 ## Exercise 2: Geolocation
+
+### Problem
+Thanks to explosive subscription growth, our support team is growing! We want to make sure we cover the bulk of our customers with support hours, but we can't afford a round-the-clock solution. 
+
+Question: Where do most of our students live?
+
+What are the possible solutions? We could try the same common set of solutions
+
+* Start asking the question, add it to profile (completeness %, etc)
+* A sample survey, possibly with a bonus/contest
+* Other ideas?
+
+with the same cost and completeness problems. There's got to be a better way!
+
+
+How accurate do we have to be? We can start with a first pass analysis to find countries and continents which would show the distribution between US, Europe, and Asia.
+
+--------------------------------------------
+
+Question: We have a great English language site. What countries should we spend marketing dollars and technical on (i18n, payment processors, physical presence)
+
+What are the possible solutions? We could try the same common set of solutions
+
+* Start asking the question, add it to profile (completeness %, etc)
+* A sample survey, possibly with a bonus/contest
+* sniff browser language preferences
+* payment information
+* Other ideas?
+
+with the same cost and completeness problems. There's got to be a better way!
+
+Many implementations of user authentication end up storing IP address information in the User table -- specifically the last IP address used by that specific user. We can use geolocation APIs to map the IP to location data and solve our problem.
+
+IP addresses are not a perfect solution thanks to VPNs, mobile access, and travel, but the data is *right there* if we have the tools to handle it. Our solution only needs to assign people to countries or regions so the accuracy doesn't have to be high.
+
+### Code
+
+There are myriad web services for geolocating data as well as free databases. I'm going to use a free service which also is available as open source -- https://github.com/fiorix/freegeoip. It combines the freely available limited version of the commerical MaxMind database with some additional custom data and runs as a local Go-based webservice. Ployglot for the win!
+
+### Results
+
+	demo.group_and_count(:country_name).all
+	=> [{:country_name=>"Canada", :count=>2},
+ 	{:country_name=>"Germany", :count=>1},
+ 	{:country_name=>"Reserved", :count=>3},
+ 	{:country_name=>"United Kingdom", :count=>5},
+ 	{:country_name=>"United States", :count=>80}]
+
+Looks like everyone is in North America with a few European outliers. We'll be fine with English it seems. Though we should probably look at Spanish since that a significant secondary language in the US. We can also dig in to Canada to see if its Quebec and we should think about French.
+
+	demo.group_and_count(:country_name, :region_name).order(:count).all
+	=> [{:country_name=>"Germany", :region_name=>"Hamburg", :count=>1},
+	 {:country_name=>"United Kingdom", :region_name=>"Tameside", :count=>1},
+	 {:country_name=>"United States", :region_name=>"Idaho", :count=>1},
+	 {:country_name=>"United States", :region_name=>"Massachusetts", :count=>1},
+	 {:country_name=>"United States", :region_name=>"South Carolina", :count=>1},
+	 {:country_name=>"United States", :region_name=>"Tennessee", :count=>1},
+	 {:country_name=>"Canada", :region_name=>"Ontario", :count=>2},
+	 {:country_name=>"United Kingdom", :region_name=>"", :count=>2},
+	 {:country_name=>"United Kingdom", :region_name=>"Manchester", :count=>2},
+	 {:country_name=>"United States", :region_name=>"Illinois", :count=>2},
+	 {:country_name=>"United States", :region_name=>"North Carolina", :count=>2},
+	 {:country_name=>"Reserved", :region_name=>"", :count=>3},
+	 {:country_name=>"United States", :region_name=>"", :count=>3},
+	 {:country_name=>"United States", :region_name=>"Maryland", :count=>3},
+	 {:country_name=>"United States", :region_name=>"New York", :count=>4},
+	 {:country_name=>"United States", :region_name=>"Georgia", :count=>5},
+	 {:country_name=>"United States", :region_name=>"California", :count=>6},
+	 {:country_name=>"United States", :region_name=>"Oregon", :count=>17},
+	 {:country_name=>"United States", :region_name=>"Florida", :count=>34}]
+	 
+Looks like a pretty big East/West Coast split!
+
+What else can we do? We can look at timezones for support hours, look for places to try meatspace events (Florida looks good!), and even create a pretty map.
+
+
+
+### Lessons Learned
+
+Geolocation
+
 ## Exercise 3: Grouping (Categorization)
+
+### Problem
+### Code
+### Results
+### Lessons Learned
+
 ## Exercise 4: Similarity
-## Bonus: Data Warehousing - Star Schema for Users
-## Bonus: Tools of the trade: Julia, Python, R, Octave, etc
-## Bonus: Using R with Ruby
-## Bonus: Frontiers
+
+### Problem
+### Code
+### Results
+### Lessons Learned
+
+## Bonus Round
+### Data Warehousing - Star Schema for Users
+### Tools of the trade: Julia, Python, R, Octave, etc
+### Using R with Ruby
+### Frontiers
 
 
 
