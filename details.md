@@ -168,7 +168,7 @@ IP addresses are not a perfect solution thanks to VPNs, mobile access, and trave
 
 ### Code
 
-There are myriad web services for geolocating data as well as free databases. I'm going to use a free service which also is available as open source -- https://github.com/fiorix/freegeoip. It combines the freely available limited version of the commerical MaxMind database with some additional custom data and runs as a local Go-based webservice. Ployglot for the win!
+There are myriad web services for geolocating data as well as free databases. I'm going to use a free service which also is available as open source -- https://github.com/fiorix/freegeoip. It combines the freely available limited version of the commerical MaxMind database with some additional custom data using some Python scripts and runs as a local Go-based webservice. Ployglot for the win!
 
 ### Results
 
@@ -215,7 +215,16 @@ Geolocation
 ## Exercise 3: Grouping (Categorization)
 
 ### Problem
+Our subscription base is growing like crazy! We also have a great new companion feature to our toolset. We believe we have at least three different sets of subscribers -- hobbyists, professionals, and superusers -- and want to target each of those groups differently to start marketing our latest product.
+
+Question: How do we divide our users into our three sets? 
+
+
+
 ### Code
+
+How many segments, a-priori? k = Sqrt(n/2)
+
 ### Results
 ### Lessons Learned
 
