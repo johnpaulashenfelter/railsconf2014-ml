@@ -14,4 +14,5 @@ gem 'faraday'
 
 gem 'ai4r'
 gem 'hierclust'
-gem 'linalg'
+#gem 'linalg'
+gem 'linalg', git: 'git://github.com/ivanku/linalg.git'
