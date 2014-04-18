@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.1.1'        # tested successfully
-# ruby '2.0.0-p451' tested successfully
-# ruby '1.9.3-p194' tested successfully
+# ruby '2.1.1' tested successfully
+# ruby '2.0.0' tested successfully on p451
+# ruby '1.9.3' tested successfully on p194, p484
 
 gem 'sqlite3'     # simplest possible db
 gem 'sequel'      # simplest possible db access
