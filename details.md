@@ -216,7 +216,7 @@ What else can we do? We can look at timezones for support hours, look for places
 
 ### Lessons Learned
 
-Geolocation
+Geolocation is not hard when you start with an IP address, especially if you can sacrifice so data and allow some ambiguity.
 
 ## Exercise 3: Grouping (Categorization)
 
@@ -229,7 +229,7 @@ Question: How do we divide our users into our three sets?
 
 ### Code
 
-How many segments, a-priori? k = Sqrt(n/2)
+How many segments, a-priori? k = Sqrt(n/2). Is one rubric. Many more. 
 
 ### Results
 ### Lessons Learned
