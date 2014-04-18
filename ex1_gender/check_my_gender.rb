@@ -5,7 +5,12 @@ require 'sexmachine'
 # Create detector
 d = SexMachine::Detector.new(case_sensitive: false)
 
-# List of users
+# Quick demo
+name = 'YOUR NAME HERE'
+gender = d.get_gender name
+puts "#{name}, #{gender}"
+
+# List of interesting users
 users = [
 'john',
 'susan',
@@ -13,10 +18,10 @@ users = [
 'jamie',
 'river',
 'cedar',
-'justice',
-'your name here'
+'justice'
 ]
 
+puts "Interesing results..."
 users.each do |name|
   gender = d.get_gender name
   puts "#{name}, #{gender}"

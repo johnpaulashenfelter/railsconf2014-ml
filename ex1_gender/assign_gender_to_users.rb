@@ -5,10 +5,9 @@ require 'sequel'
 require 'sexmachine'
 
 # Connect db
-# pg DB = Sequel.connect(adapter: 'postgres', host: 'localhost', database: 'machine_learning', user: 'rails')
 DB = Sequel.connect('sqlite://machine-learning.db')
 
-# Setup table to hold data
+# Setup table to hold data, erasing the old one
 DB.create_table!(:gender_demographics) do
   foreign_key :user_id
   String :first_name
@@ -19,10 +18,12 @@ end
 # Load detector
 d = SexMachine::Detector.new(case_sensitive: false)
 
-# Assign users
+# Get the users from the database
 users = DB[:users]
+# Get ready to insert out results
 demo = DB[:gender_demographics]
 
+# Loop through the users
 users.each do |user|
   name = user[:first_name]
   gender = d.get_gender user[:first_name]
