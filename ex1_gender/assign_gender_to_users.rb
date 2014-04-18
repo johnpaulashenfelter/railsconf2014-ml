@@ -33,6 +33,5 @@ end
 puts "Results"
 puts demo.group_and_count(:assigned_gender).all
 
-puts "Androgenous Names"
 andys = demo.where(assigned_gender: 'andy')
-andys.each {|a| puts a[:first_name]}
+puts "Androgenous Names -- #{andys.count}"
