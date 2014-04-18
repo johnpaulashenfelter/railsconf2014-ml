@@ -170,6 +170,12 @@ IP addresses are not a perfect solution thanks to VPNs, mobile access, and trave
 
 There are myriad web services for geolocating data as well as free databases. I'm going to use a free service which also is available as open source -- https://github.com/fiorix/freegeoip. It combines the freely available limited version of the commerical MaxMind database with some additional custom data using some Python scripts and runs as a local Go-based webservice. Ployglot for the win!
 
+	`$ cd $GOPATH/src/github.com/fiorix/freegeoip`
+	`$ cd db`
+	`$ ./updatedb`
+	`$ cd ..`
+	`$ ./freegeoip`
+
 ### Results
 
 	demo.group_and_count(:country_name).all
@@ -231,6 +237,10 @@ How many segments, a-priori? k = Sqrt(n/2)
 ## Exercise 4: Similarity
 
 ### Problem
+We just implemented social networking on the site! Users can follow, friend, and like each other just like Facebook. But to really get things moving in the right direction, we want to recommend people to follow who are like them. How do we do it?
+
+Question: 
+
 ### Code
 ### Results
 ### Lessons Learned
