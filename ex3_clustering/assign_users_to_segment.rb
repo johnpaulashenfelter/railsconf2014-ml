@@ -7,20 +7,18 @@ DB = Sequel.connect('sqlite://machine-learning.db')
 
 class Cluster
   attr_reader :vcentroid
-  # Initialize the class instance
+
   def initialize
     @people = Array.new
-    @vcentroid = Hash.new( "0" )
+    @vcentroid = Hash.new(0)
   end
 
-  # Add a feature vector to the cluster
-  def add( person )
-    @people.push( person )
+  def add(person)
+    @people.push(person)
   end
 
-  # Remove a feature vector from the cluster
-  def remove( person )
-    @people.delete( person )
+  def remove(person)
+    @people.delete(person)
   end
 
   # Return the cluster centroid
@@ -33,7 +31,7 @@ class Cluster
 
     # Clear the centroid vector
     @vcentroid.clear
-    tcentroid = Hash.new( "0" )
+    tcentroid = Hash.new(0)
 
     # Iterate through each feature vector
     @people.each do |person|
@@ -52,33 +50,26 @@ class Cluster
 
   end
 
-  # Calculate the geometric distance
-  def calculate_gd( person )
-
+  # Calculate the geometric distance of EACH ELEMENT in vector
+  def calculate_gd(vector)
     gd = 0.0
 
-    person.each do |key,value|
+    vector.each do |key,value|
       gd += (@vcentroid[key].to_f-value.to_f) * (@vcentroid[key].to_f-value.to_f)
     end
 
     gd = Math.sqrt(gd)
-
-    return gd
-
   end
 end
 
-def kmeans
+def kmeans(k=3)
 
   # Define our clusters and initialize them with two users
   clusters = []
-  3.times {clusters << Cluster.new}
+  k.times {clusters << Cluster.new}
 
-  # get users
-  users = DB[:users]
-
-  users.each do |user|
-    n = user[:id] % 3 # assign randomly to groups
+  DB[:users].each do |user|
+    n = user[:id] % k # assign randomly to groups
     clusters[n].add(badges: user[:person_badges_count])
   end
 
@@ -99,9 +90,9 @@ def kmeans
 
       # Check members of cluster 1 against the cluster centroids
       puts "Checking cluster #{i}"
-      people.each do |person|
+      cluster.get_people.each do |person|
         clusters.each_with_index do |other_cluster, j|
-          if other_cluster.calculate_gd(person) < cluster.calculate_gd(person) then
+          if other_cluster.calculate_gd(person) < cluster.calculate_gd(person)
             puts "Feature vector moved from cluster #{i} to cluster #{j}"
             cluster.remove(person)
             other_cluster.add(person)
@@ -127,4 +118,4 @@ def kmeans
 
 end
 
-kmeans
+kmeans(3)
