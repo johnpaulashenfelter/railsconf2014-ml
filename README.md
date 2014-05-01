@@ -13,9 +13,17 @@ You'll need
 	* Ruby (I'm using 2.1.1 but tested with latest 2.0 and 1.9.3)
 	* this github repository
 	
-You should install the gems
+You should install the gems<sup>†</sup>
 
 `$ bundle`
+
+_<sup>†</sup>the `linalg` gem needs `gfortran` and `f2c` to be installed._  
+On OSX, using homebrew, these dependencies can quickly be satisfied in 3 easy steps: 
+```bash 
+brew install gfortran
+brew pull https://github.com/Homebrew/homebrew/pull/28768 # this formula didn't make it in... yet.
+brew install f2c
+```
 
 And if you want to run one of the webservices we'll use locally, you'll need
 
