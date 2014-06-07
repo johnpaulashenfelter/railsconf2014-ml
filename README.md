@@ -3,6 +3,18 @@
 
 Welcome to my workshop! There's a bit of setup required to get the most out of our time, so hopefully you'll have a chance to install the necessary tools before we fight conference or hotel WiFi setups.
 
+## Slides
+
+Several vesions of this talk are on SpeakerDeck.
+
+The full slides from RailsConf 2014 are here 
+
+https://speakerdeck.com/jpa5n/machine-learning-for-fun-and-profit
+
+while the 30m overview from RubyNation 2014, which may be an even better version of the talk, is here
+
+https://speakerdeck.com/jpa5n/machine-learning-for-fun-and-profit-abbreviated
+
 ## Setup
 
 This talk requires a few gems and other tools you may be unlikely to have handy. 
@@ -30,6 +42,12 @@ If you install it locally, which I'd recommend, you should follow the README dir
 ### Problems
 
 The most likely problems will be with installation of the _linalg_ gem which can require additional dependencies on some Ubuntu versions (at least based on Github issues and Stack Overflow articles) or other tweaks. I found the parallel588 fork the most reliable but if you have trouble with it, you can try the alternative forks in the Gemfile.
+
+You will likely need to install the f2c package on OSX
+
+`brew install f2c`
+
+to get the Fortran (yes Fortran. welcome to 1977) to C bindings that the linalg gem needs.
 
 ### Worries
 
