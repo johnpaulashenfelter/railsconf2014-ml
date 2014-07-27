@@ -20,8 +20,8 @@ You should install the gems<sup>†</sup>
 _<sup>†</sup>the `linalg` gem needs `gfortran` and `f2c` to be installed._  
 On OSX, using homebrew, these dependencies can quickly be satisfied in 3 easy steps: 
 ```bash 
-brew install gfortran
-brew pull https://github.com/Homebrew/homebrew/pull/28768 # this formula didn't make it in... yet.
+brew install gcc # Gfortran is now part of gcc
+brew tap homebrew/headonly
 brew install f2c
 ```
 
